@@ -26,6 +26,9 @@ void Particle::integrate(real duration)
 {
     // We don't integrate things with zero mass.
     if (inverseMass <= 0.0f) return;
+    if (position.y < 2.1 && std::abs(velocity.y) < 0.2f) {
+        velocity.y = 0;
+    }
 
     assert(duration > 0.0);
 

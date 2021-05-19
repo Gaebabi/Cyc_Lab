@@ -11,9 +11,9 @@ Mover::Mover()
 	m_particle = new cyclone::Particle();
 
 	m_particle->setPosition(5, 20, 0);
-	m_particle->setVelocity(0,0, 0);
+	m_particle->setVelocity(10, 0, 0);
 	m_particle->setMass(1.0f);
-	m_particle->setDamping(0.99f);
+	m_particle->setDamping(0.95f);
 	m_particle->setAcceleration(cyclone::Vector3::GRAVITY);
 
 }

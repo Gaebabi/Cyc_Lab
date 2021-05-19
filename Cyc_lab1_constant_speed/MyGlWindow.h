@@ -25,7 +25,7 @@ class MyGlWindow : public Fl_Gl_Window {
 		
 
 		std::vector<Vec3f *> history;
-		std::vector<Mover*> m_mover;
+		std::vector<Mover*> m_mover; // º¤ÅÍ ( Mover ¹è¿­ )
 		
 
 		Fl_Slider* time;	
