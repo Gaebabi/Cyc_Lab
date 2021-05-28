@@ -32,7 +32,7 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	m_viewer = new Viewer(viewPoint, viewCenter, upVector, 45.0f, aspect);
 
 	// 공 생성 ( 벡터에 add )
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 300; i++) {
 		m_mover.push_back(new Mover());
 	}
 
@@ -103,7 +103,7 @@ void MyGlWindow::draw()
   glViewport(0,0,w(),h());
 
 	// clear the window, be sure to clear the Z-Buffer too
-  glClearColor(0.2f,0.2f,.2f,0);		// background should be blue
+  glClearColor(0.0f,0.0f,.0f,0);		// background should be blue
 
 
   glClearStencil(0);
@@ -119,7 +119,7 @@ void MyGlWindow::draw()
   setupFloor();
 
   glPushMatrix();
-	drawFloor(200,20);
+	//drawFloor(200,20);
   glPopMatrix();
 
 
@@ -155,11 +155,11 @@ void MyGlWindow::draw()
   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
   //draw shadow
-  setupShadows();
+  /*setupShadows();
   for (unsigned int i = 0; i < m_mover.size(); i++) {
 	  if (m_mover[i]) m_mover[i]->draw(1);
   }
-  unsetupShadows();
+  unsetupShadows();*/
 
 
   glEnable(GL_LIGHTING);
@@ -183,6 +183,7 @@ void MyGlWindow::test()
 	
 }
 
+const float G = 9.8f;
 void MyGlWindow::update()
 {
 	TimingData::get().update();
@@ -191,30 +192,62 @@ void MyGlWindow::update()
 	
 	float duration = (float)TimingData::get().lastFrameDuration * 0.003;
 
-
 	// 모든 공 루프 (자신)
 	for (unsigned int i = 0; i < m_mover.size(); i++) {
-		glm::vec3 _velocity(0.0f, 0.0f, 0.0f);
+		// 활성화 상태일 경우
+		if (m_mover[i]->active) {
+			glm::vec3 _velocity(0.0f, 0.0f, 0.0f);
+			// 모든 공 루프 (상대)
+			for (unsigned int j = 0; j < m_mover.size(); j++) {
+				if (m_mover[i] && i != j) { // 자신이 아닐경우
+					cyclone::Vector3 _vec = m_mover[j]->m_position - m_mover[i]->m_position;
 
-		// 모든 공 루프 (상대)
-		for (unsigned int j = 0; j < m_mover.size(); j++) {
-			if (m_mover[i] && i != j) { // 자신이 아닐경우
-				cyclone::Vector3 _vec = m_mover[j]->m_position-m_mover[i]->m_position;
+					glm::vec3 _glmvec(_vec.x, _vec.y, _vec.z);
+					// 거리 구하기
+					float distance = glm::length(_glmvec);
 
-				glm::vec3 _glmvec(_vec.x, _vec.y, _vec.z);
-				// 거리 구하기
-				float distance = glm::length(_glmvec);
+					// 충돌 중이지 않을 시 인력 적용
+					if (distance > m_mover[i]->ballSize + m_mover[j]->ballSize) {
+						// F = G*(m1*m2/r^2)
+						float F = G * ((m_mover[i]->ballMass * m_mover[j]->ballMass) / (distance * distance));
 
-				// F (질량 통일)
-				float F = 0.1f / (distance * distance);
+						// 방향 * F
+						_velocity += (glm::normalize(_glmvec) * F);
+					}
+				}
+			}
+			// 인력 적용
+			m_mover[i]->velocity += glm::vec3(_velocity.x, _velocity.y, _velocity.z);
+		}
+	}
+	// 모든 공 루프 (자신)
+	for (unsigned int i = 0; i < m_mover.size(); i++) {
+		// 활성화 상태일 경우
+		if (m_mover[i]->active) {
+			// 모든 공 루프 (상대)
+			for (unsigned int j = 0; j < m_mover.size(); j++) {
+				if (m_mover[i] && i != j && m_mover[j]->active) { // 자신이 아닐경우 & 상대가 활성화 상태인지
+					cyclone::Vector3 _vec = m_mover[j]->m_position - m_mover[i]->m_position;
 
-				// 방향 * F
-				_velocity += (glm::normalize(_glmvec) * F);
+					glm::vec3 _glmvec(_vec.x, _vec.y, _vec.z);
+					// 거리 구하기
+					float distance = glm::length(_glmvec);
+
+					// 충돌 시 합치기
+					if (distance <= m_mover[i]->ballSize + m_mover[j]->ballSize) {
+						m_mover[i]->velocity += m_mover[j]->velocity;
+						m_mover[i]->ballMass += m_mover[j]->ballMass;
+						m_mover[i]->m_position = (m_mover[i]->m_position + m_mover[j]->m_position) * 0.5f;
+
+						// 상대 비활성화
+						m_mover[j]->active = false;
+					}
+				}
 			}
 		}
-		// 가속 적용
-		m_mover[i]->velocity += glm::vec3(_velocity.x, _velocity.y, _velocity.z);
 	}
+
+	//3.14f * glm::pow(m_mover[j]->ballSize, 3);
 	for (unsigned int i = 0; i < m_mover.size(); i++) {
 		if (m_mover[i]) m_mover[i]->update(duration);
 	}
@@ -279,7 +312,7 @@ void MyGlWindow::setProjection(int clearProjection)
 	glLoadIdentity();
   // compute the aspect ratio so we don't distort things
   double aspect = ((double) w()) / ((double) h());
-  gluPerspective(fieldOfView, aspect, 1, 1000);
+  gluPerspective(fieldOfView, aspect, 1, 100000);
 
   // put the camera where we want it to be
   glMatrixMode(GL_MODELVIEW);

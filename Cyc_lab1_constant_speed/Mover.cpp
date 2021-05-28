@@ -66,17 +66,20 @@ void Mover::stop()
 }
 void Mover::draw(int shadow)
 {
-	if (shadow) {
+	/*if (shadow) {
 		glColor3f(0,0,0);
 	}
-	else {
-		glColor3f(1.0f, 0,0 );
-	}
+	else {*/
+		glColor3f(ballMass / 5.0f, 2.0f / ballMass, 0.5f);
+	//}
 
 	glPushMatrix();
 	//glTranslatef(0,1,0);
 	glTranslatef(m_position.x, m_position.y, m_position.z);
-	glutSolidSphere(1.0f, 60, 60);
+
+	ballSize = glm::pow(ballMass * 3 / 4 / 3.14f, 1/3);
+	
+	glutSolidSphere(ballSize, 60, 60);
 	glPopMatrix();
 
 }

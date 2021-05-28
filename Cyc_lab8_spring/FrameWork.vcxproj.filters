@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="3DUtils.cpp" />
+    <ClCompile Include="DrawUtils.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mover.cpp" />
+    <ClCompile Include="MyGlWindow.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="timing.cpp" />
+    <ClCompile Include="Viewer.cpp" />
+    <ClCompile Include="..\Cyclone\body.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\collide_coarse.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\collide_fine.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\contacts.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\core.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\fgen.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\joints.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="MMatrix.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\particle.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\pcontacts.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\pfgen.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\plinks.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\pworld.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\random.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Cyclone\world.cpp">
+      <Filter>cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="MySpring.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Cyclone\glut.h" />
+    <ClInclude Include="3DUtils.h" />
+    <ClInclude Include="DrawUtils.H" />
+    <ClInclude Include="Mover.h" />
+    <ClInclude Include="MyGlWindow.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="timing.h" />
+    <ClInclude Include="Vec3f.h" />
+    <ClInclude Include="Viewer.h" />
+    <ClInclude Include="..\Cyclone\body.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\collide_coarse.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\collide_fine.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\contacts.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\core.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\cyclone.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\fgen.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\joints.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="MMatrix.H">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\particle.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\pcontacts.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\pfgen.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\plinks.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\precision.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\pworld.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\random.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Cyclone\world.h">
+      <Filter>cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="MySpring.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="cyclone">
+      <UniqueIdentifier>{a495a1b2-11f3-49d5-b297-36c901f7080b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
