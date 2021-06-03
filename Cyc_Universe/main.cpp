@@ -87,6 +87,13 @@ void Focus(Fl_Widget* w, void* data)
 	MyGlWindow* win = (MyGlWindow*)data;
 	win->focus = i;
 }
+void DrawType(Fl_Widget* w, void* data)
+{
+	Fl_Choice* widget = (Fl_Choice*)w;
+	int i = widget->value();
+	MyGlWindow* win = (MyGlWindow*)data;
+	win->drawType = i;
+}
 
 int main()
 {
@@ -143,6 +150,13 @@ int main()
 	_Focus->add("Biggest Ball Center");
 	_Focus->value(0);
 	_Focus->callback((Fl_Callback*)Focus, gl);
+
+	Fl_Choice* _DrawType;
+	_DrawType = new Fl_Choice(width - 100, height - 40, 25, 20, "DrawType");
+	_DrawType->add("Ball");
+	_DrawType->add("Box");
+	_DrawType->value(0);
+	_DrawType->callback((Fl_Callback*)DrawType, gl);
 
 	wind->end();
 

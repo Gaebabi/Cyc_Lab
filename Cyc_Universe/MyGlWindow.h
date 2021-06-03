@@ -42,6 +42,8 @@ class MyGlWindow : public Fl_Gl_Window {
 
 		glm::f64vec3 centerVelocity;
 
+		int drawType = 0;
+
 	private:
 		void draw();					// standard FlTk
 		

@@ -27,7 +27,7 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	m_viewer = new Viewer(viewPoint, viewCenter, upVector, 45.0f, aspect);
 
 	// 공 생성 ( 벡터에 add )
-	for (int i = 0; i < 5000; i++) {
+	for (int i = 0; i < 1000; i++) {
 		m_mover.push_back(new Mover());
 	}
 	centerVelocity = glm::f64vec3(0, 0, 0);
@@ -36,6 +36,7 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	TimingData::init();
 	run = 0;
 
+	drawType = 0;
 }
 
 
@@ -228,7 +229,7 @@ void MyGlWindow::draw()
 		 //m_viewer->m_viewPoint = glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z);
 		 m_viewer->centerAt(glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z));
 	 }
-	 // 제일 큰 행성 포커스 + 가속도 중심점
+	 // 제일 큰 행성 포커스 + 가속도 중심점 (미완성)
 	 if (focus == 3) {
 		 unsigned int maxInd = 0;
 		 double maxSize = 0;
@@ -241,6 +242,11 @@ void MyGlWindow::draw()
 		 //m_viewer->m_viewPoint = glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z);
 		 m_viewer->centerAt(glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z));
 		 centerVelocity = glm::f64vec3(glm::vec3(m_mover[maxInd]->velocity.x, m_mover[maxInd]->velocity.y, m_mover[maxInd]->velocity.z)) / (m_mover[maxInd]->ballMass);
+	 }
+
+
+	 for (unsigned int i = 0; i < m_mover.size(); i++) {
+		 m_mover[i]->drawType = drawType;
 	 }
 }
 

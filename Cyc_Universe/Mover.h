@@ -10,6 +10,7 @@
 class Mover
 {
 public:
+	int drawType = 0;
 	Mover();
 	~Mover();
 	

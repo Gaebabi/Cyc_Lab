@@ -2,9 +2,10 @@
 
 Mover::Mover()
 {
-	m_position = cyclone::Vector3(rand() % 5000 - 2500, rand() % 5000 - 2500, rand() % 5000 - 2500);
+	m_position = cyclone::Vector3(rand() % 500 - 250, rand() % 500 - 250, rand() % 500 - 250);
 	velocity = glm::f64vec3(0, 0, 0);
 
+	// 공의 부피 공식
 	ballSize = glm::pow((ballMass * 3.0 / 4.0 / 3.1415), 0.3333);
 }
 Mover::~Mover()
@@ -41,9 +42,10 @@ void Mover::draw()
 	glPushMatrix();
 	glTranslatef(m_position.x, m_position.y, m_position.z);
 
-
-	glutSolidCube(ballSize);
-	//glutSolidSphere(ballSize, 30, 30);
+	if(drawType == 0)
+		glutSolidSphere(ballSize, 30, 30);
+	else
+		glutSolidCube(ballSize);
 
 	glPopMatrix();
 }
