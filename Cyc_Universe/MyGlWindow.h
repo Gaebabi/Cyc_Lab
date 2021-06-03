@@ -33,9 +33,14 @@ class MyGlWindow : public Fl_Gl_Window {
 		void update(int updateRate);
 		void drawStuff();
 		void doPick();
-		void test();
+		void BtnClear();
 
+		bool drawLine = false;
+		int focus = 0;
 		int selected = -1;
+		unsigned int totalTick = 0;
+
+		glm::f64vec3 centerVelocity;
 
 	private:
 		void draw();					// standard FlTk
@@ -49,5 +54,6 @@ class MyGlWindow : public Fl_Gl_Window {
 		void setProjection(int clearProjection = 1);
 		void getMouseNDC(float& x, float& y);
 		void setupLight(float x, float y, float z);
+		void putText(char* string, int x, int y, float r, float g, float b);
 };
 

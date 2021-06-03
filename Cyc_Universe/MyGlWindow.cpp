@@ -1,12 +1,7 @@
-
-
 #include "MyGlWindow.h"
-
-
 
 #include <iostream>
 #include "drawUtils.h"
-
 
 #include "timing.h"
 
@@ -32,9 +27,10 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	m_viewer = new Viewer(viewPoint, viewCenter, upVector, 45.0f, aspect);
 
 	// 공 생성 ( 벡터에 add )
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 5000; i++) {
 		m_mover.push_back(new Mover());
 	}
+	centerVelocity = glm::f64vec3(0, 0, 0);
 
 
 	TimingData::init();
@@ -87,6 +83,43 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
   }
 
 
+  void drawStrokeText(char* string, int x, int y, int z)
+  {
+	  char* c;
+	  glPushMatrix();
+	  glTranslatef(x, y + 8, z);
+	  glScalef(0.2, 0.2, 0.2);
+	  for (c = string; *c != '\0'; c++)
+	  {
+		  glutStrokeCharacter(GLUT_STROKE_ROMAN, *c);
+	  }
+	  glPopMatrix();
+  }
+  void MyGlWindow::putText(char* string, int x, int y, float r, float g, float b)
+  {
+
+	  glDisable(GL_LIGHTING);
+
+	  glMatrixMode(GL_PROJECTION);
+	  glLoadIdentity();
+	  glMatrixMode(GL_MODELVIEW);
+	  glLoadIdentity();
+
+	  ortho();
+
+
+	  glDisable(GL_LIGHTING);
+	  glDisable(GL_DEPTH_TEST);
+
+
+	  glColor3f(r, g, b);
+	  drawStrokeText(string, x, y, 0);
+
+	  glEnable(GL_DEPTH_TEST);
+	  glEnable(GL_LIGHTING);
+
+
+  }
 
 
 
@@ -166,19 +199,66 @@ void MyGlWindow::draw()
   }
   glPopMatrix();
 
-  
-
  glEnable(GL_COLOR_MATERIAL);
 
+
+ std::string str = "count: " + std::to_string(m_mover.size());
+ putText((char*)str.c_str(), 10, 10, 1, 1, 0);
+
+ std::string str2 = "tick: " + std::to_string(totalTick);
+ putText((char*)str2.c_str(), 10, 40, 1, 1, 0);
+
+
+	 centerVelocity = glm::f64vec3(0, 0, 0);
+	 if (focus == 0) {
+	 }
+	 if (focus == 1) {
+		 m_viewer->centerAt(glm::vec3(0, 0, 0));
+	 }
+	 // 제일 큰 행성 포커스
+	 if (focus == 2) {
+		 unsigned int maxInd = 0;
+		 double maxSize = 0;
+		 for (unsigned int i = 0; i < m_mover.size(); i++) {
+			 if (m_mover[i]->ballMass > maxSize) {
+				 maxSize = m_mover[i]->ballMass;
+				 maxInd = i;
+			 }
+		 }
+		 //m_viewer->m_viewPoint = glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z);
+		 m_viewer->centerAt(glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z));
+	 }
+	 // 제일 큰 행성 포커스 + 가속도 중심점
+	 if (focus == 3) {
+		 unsigned int maxInd = 0;
+		 double maxSize = 0;
+		 for (unsigned int i = 0; i < m_mover.size(); i++) {
+			 if (m_mover[i]->ballMass > maxSize) {
+				 maxSize = m_mover[i]->ballMass;
+				 maxInd = i;
+			 }
+		 }
+		 //m_viewer->m_viewPoint = glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z);
+		 m_viewer->centerAt(glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z));
+		 centerVelocity = glm::f64vec3(glm::vec3(m_mover[maxInd]->velocity.x, m_mover[maxInd]->velocity.y, m_mover[maxInd]->velocity.z)) / (m_mover[maxInd]->ballMass);
+	 }
 }
 
-void MyGlWindow::test()
+
+void MyGlWindow::BtnClear()
 {
-	
+	for (int i = 0; i < m_mover.size(); ++i) {
+		m_mover[i]->positionHistory.clear();
+	}
+
+	for (int i = m_mover.size()-1; i >= 0 ; --i) {
+		if (!m_mover[i]->active) {
+			std::cout << i << std::endl;
+			m_mover.erase(m_mover.begin()+i);
+		}
+	}
 }
 
-// 중력 상수 G
-const double G = 9.8;
 void MyGlWindow::update(int updateRate)
 {
 	TimingData::get().update();
@@ -187,42 +267,39 @@ void MyGlWindow::update(int updateRate)
 	unsigned int i = 0, j = 0, size = m_mover.size();
 	double distance, F;
 	unsigned int rep;
+	totalTick += updateRate;
 	/* 배속 START */
 	for (rep = 0; rep < updateRate; ++rep) {
+		size = m_mover.size();
 
 		/* 인력 START */
 			// 모든 공 루프 (자신)
 			for (i = 0; i < size; ++i) {
-				// 활성화 상태일 경우
-				if (m_mover[i]->active) {
-					glm::f64vec3 _velocity(0, 0, 0);
-					// 모든 공 루프 (상대)
-					for (j = 0; j < size; ++j) {
-						if (i != j && m_mover[j]->active) { // 자신이 아닐경우 & 상대가 활성화 상태인지
-							cyclone::Vector3 _vec = m_mover[j]->m_position - m_mover[i]->m_position;
+				// 모든 공 루프 (상대)
+				for (j = 0; j < size; ++j) {
+					if (i != j && m_mover[j]->active) { // 자신이 아닐경우 & 상대가 활성화 상태인지
+						cyclone::Vector3 _vec = m_mover[j]->m_position - m_mover[i]->m_position;
 
-							glm::f64vec3 _dir(_vec.x, _vec.y, _vec.z);
-							// 거리 구하기
-							distance = glm::length(_dir);
+						glm::f64vec3 _dir(_vec.x, _vec.y, _vec.z);
+						// 거리 구하기
+						distance = glm::length(_dir);
 
-							// F = G*(m1*m2/r^2)
-							F = G * ((m_mover[i]->ballMass) * (m_mover[j]->ballMass) / (distance * distance));
+						// F = G*(m1*m2/r^2)
+						F = (m_mover[i]->ballMass) * (m_mover[j]->ballMass) / (distance * distance);
 
-							F = F * 0.001; // 정밀도
-							// 방향 * F
-							_velocity += (glm::normalize(_dir) * F);
-						}
+						// 방향 * F
+						m_mover[i]->velocity += (glm::normalize(_dir) * F);
 					}
-					// 인력 적용
-					m_mover[i]->velocity += glm::f64vec3(_velocity.x, _velocity.y, _velocity.z);
 				}
 			}
 		/* 인력 END */
 
 		/* velocity 적용 START */
 			for (i = 0; i < size; ++i) {
-				if (m_mover[i]->active) // 활성화 상태인지
-					m_mover[i]->update(); // velocity 적용
+				m_mover[i]->update(); // velocity 적용
+				if (drawLine) {
+					m_mover[i]->positionHistory.push_back(glm::vec3(m_mover[i]->m_position.x, m_mover[i]->m_position.y, m_mover[i]->m_position.z));
+				}
 			}
 		/* velocity 적용 END */
 
@@ -247,6 +324,7 @@ void MyGlWindow::update(int updateRate)
 								if (distance < m_mover[i]->ballSize + m_mover[j]->ballSize) {
 									m_mover[i]->velocity += m_mover[j]->velocity;
 									m_mover[i]->ballMass += m_mover[j]->ballMass;
+									m_mover[i]->ballSize = glm::pow((m_mover[i]->ballMass * 3.0 / 4.0 / 3.1415), 0.3333);
 									//m_mover[i]->m_position = (m_mover[i]->m_position + m_mover[j]->m_position) * 0.5; // 위치 보간
 
 									// 상대 비활성화
@@ -264,23 +342,18 @@ void MyGlWindow::update(int updateRate)
 			}
 		/* 충돌 체크 END */
 
+		/* 비활성 제거 START */
+			for (int i = m_mover.size() - 1; i >= 0; --i) {
+				if (!m_mover[i]->active) {
+					std::cout << i << std::endl;
+					m_mover.erase(m_mover.begin() + i);
+				}
+			}
+		/* 비활성 제거 END */
 	}
 	/* 배속 END */
 
 
-	// 제일 큰 행성 포커스
-	if (updateRate == 1) {
-		unsigned int maxInd = 0;
-		double maxSize = 0;
-		for (unsigned int i = 0; i < m_mover.size(); i++) {
-			if (m_mover[i]->ballMass > maxSize) {
-				maxSize = m_mover[i]->ballMass;
-				maxInd = i;
-			}
-		}
-		//m_viewer->m_viewPoint = glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z);
-		m_viewer->centerAt(glm::vec3(m_mover[maxInd]->m_position.x, m_mover[maxInd]->m_position.y, m_mover[maxInd]->m_position.z));
-	}
 
 	/*
 	// doPick() 구현중...
@@ -350,7 +423,7 @@ void MyGlWindow::setProjection(int clearProjection)
 	glLoadIdentity();
   // compute the aspect ratio so we don't distort things
   double aspect = ((double) w()) / ((double) h());
-  gluPerspective(fieldOfView, aspect, 1, 100000);
+  gluPerspective(fieldOfView, aspect, 1, 10000000);
 
   // put the camera where we want it to be
   glMatrixMode(GL_MODELVIEW);
