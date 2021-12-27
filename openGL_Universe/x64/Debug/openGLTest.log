@@ -1,0 +1,11 @@
+﻿  MyGlWindow.cpp
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(78,22): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(82,27): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(108,9): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(187,15): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(188,11): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(190,11): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(273,13): warning C4101: 'lightPos' :참조되지 않은 지역 변수입니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(460,10): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Git\Cyc_Lab\openGL_Universe\MyGlWindow.cpp(461,10): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  openGLTest.vcxproj -> C:\Git\Cyc_Lab\openGL_Universe\x64\Debug\openGLTest.exe

@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{63e252ec-1cb4-4bcc-b9a3-d4dcb038f9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\imgui">
+      <UniqueIdentifier>{86f0ebd9-315a-467c-97e1-a226026466d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Gui">
+      <UniqueIdentifier>{d13c524d-a741-4e98-be9e-cc1702e35363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Gui">
+      <UniqueIdentifier>{df46ddb1-5fca-491d-a701-e0e49dcb572e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Instance">
+      <UniqueIdentifier>{e6e74a72-1862-4eeb-9aa1-3f64762ebd76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instance">
+      <UniqueIdentifier>{ce38c37a-c777-4d20-ad70-e894bb18759a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Gui\Gizmo">
+      <UniqueIdentifier>{31be03bb-2f3c-4dde-a51b-007c79775b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Gui\Gizmo">
+      <UniqueIdentifier>{70a55bb3-9eff-41a7-8b2d-bfea68527360}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="global.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGlWindow.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpLoader.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Interval.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_internal.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_rectpack.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_textedit.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_truetype.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imconfig.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\backends\imgui_impl_glfw.h">
+      <Filter>소스 파일\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>헤더 파일\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imGuIZMO.quat\imGuIZMOquat.h">
+      <Filter>헤더 파일\Gui\Gizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imGuIZMO.quat\vGizmo.h">
+      <Filter>헤더 파일\Gui\Gizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imGuIZMO.quat\vGizmoMath.h">
+      <Filter>헤더 파일\Gui\Gizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imGuIZMO.quat\vgMath.h">
+      <Filter>헤더 파일\Gui\Gizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>헤더 파일\Instance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGlWindow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpLoader.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Interval.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_tables.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_widgets.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>소스 파일\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Instance.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imGuIZMO.quat\imGuIZMOquat.cpp">
+      <Filter>소스 파일\Gui\Gizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>소스 파일\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Performance.cpp">
+      <Filter>소스 파일\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\glad\glad\glad.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sampler.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="plane.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="plane.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="gizmo.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="gizmo.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="compute.comp">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="sampler.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="windCell.comp">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>

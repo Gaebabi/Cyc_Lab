@@ -27,7 +27,7 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	m_viewer = new Viewer(viewPoint, viewCenter, upVector, 45.0f, aspect);
 
 	// 공 생성 ( 벡터에 add )
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 2000; i++) {
 		m_mover.push_back(new Mover());
 	}
 	centerVelocity = glm::f64vec3(0, 0, 0);
@@ -283,7 +283,7 @@ void MyGlWindow::update(int updateRate)
 			for (i = 0; i < size; ++i) {
 				// 모든 공 루프 (상대)
 				for (j = 0; j < size; ++j) {
-					if (i != j && m_mover[j]->active) { // 자신이 아닐경우 & 상대가 활성화 상태인지
+					if (i != j/* && m_mover[j]->active*/) { // 자신이 아닐경우 & 상대가 활성화 상태인지
 						cyclone::Vector3 _vec = m_mover[j]->m_position - m_mover[i]->m_position;
 
 						glm::f64vec3 _dir(_vec.x, _vec.y, _vec.z);
@@ -312,6 +312,7 @@ void MyGlWindow::update(int updateRate)
 
 		/* 충돌 체크 START */
 			// 모든	 공 루프 (자신)
+			if(totalTick > 1)
 			for (i = 0; i < size; ++i) {
 				// 활성화 상태일 경우
 				if (m_mover[i]->active) {
